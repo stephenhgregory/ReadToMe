@@ -16,7 +16,7 @@ def create_main_window_layout() -> List[List]:
     main_window_layout = [
         [
         sg.Column(file_list_column),
-        # Add a seperator for *visual flare*
+        # Add a separator for *visual flare*
         sg.VSeperator(),
         sg.Column(file_viewer_column),
         ]

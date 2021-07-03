@@ -18,7 +18,7 @@ def create_main_window_layout() -> List[List]:
         sg.Column(file_list_column),
         # Add a seperator for *visual flare*
         sg.VSeperator(),
-        sg.Column(image_viewer_column),
+        sg.Column(file_viewer_column),
         ]
     ]
 
@@ -63,38 +63,6 @@ def create_file_viewer_column() -> List[List]:
     return file_viewer_column
 
 
-# First the window layout in 2 columns
-
-file_list_column = [
-    [
-        sg.Text("Audio File Folder"),
-        sg.In(size=(25, 1), enable_events=True, key="-FOLDER-"),
-        sg.FolderBrowse(),
-    ],
-    [
-        sg.Listbox(
-            values=[], enable_events=True, size=(40, 20), key="-FILE LIST-"
-        )
-    ],
-]
-
-# For now will only show the name of the file that was chosen
-image_viewer_column = [
-    [sg.Text("Choose an audio file from list on left:")],
-    [sg.Text(size=(40, 1), key="-TOUT-")],
-    [sg.Image(key="-AUDIOFILE-")],
-]
-
-# Create the full layout
-layout = [
-    [
-        sg.Column(file_list_column),
-        # sg.VSeperator(),
-        sg.Column(image_viewer_column),
-    ]
-]
-
-
 def run_main_event_loop(main_window):
     '''
     Runs the main event loop for the application
@@ -137,6 +105,38 @@ def run_main_event_loop(main_window):
 
         except:
             pass
+
+
+## First the window layout in 2 columns
+
+# file_list_column = [
+#     [
+#         sg.Text("Audio File Folder"),
+#         sg.In(size=(25, 1), enable_events=True, key="-FOLDER-"),
+#         sg.FolderBrowse(),
+#     ],
+#     [
+#         sg.Listbox(
+#             values=[], enable_events=True, size=(40, 20), key="-FILE LIST-"
+#         )
+#     ],
+# ]
+
+# # For now will only show the name of the file that was chosen
+# image_viewer_column = [
+#     [sg.Text("Choose an audio file from list on left:")],
+#     [sg.Text(size=(40, 1), key="-TOUT-")],
+#     [sg.Image(key="-AUDIOFILE-")],
+# ]
+
+# # Create the full layout
+# layout = [
+#     [
+#         sg.Column(file_list_column),
+#         # sg.VSeperator(),
+#         sg.Column(image_viewer_column),
+#     ]
+# ]
 
 
 

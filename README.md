@@ -7,3 +7,11 @@
 
 
 ReadToMe is gonna be NUT. Just wait.
+
+### Installation
+
+- To install requirements, run the following block of code in your favorite cmd line.
+  ```
+  # after 'cd <path_on_your_machine>/ReadToMe/'
+  pip install -r requirements.txt
+  ```

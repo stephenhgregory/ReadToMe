@@ -3,6 +3,7 @@
 import PySimpleGUI as sg
 import os.path
 from typing import List
+from playsound import playsound
 
 
 def run_main_event_loop(main_window):
@@ -34,7 +35,7 @@ def run_main_event_loop(main_window):
             f
             for f in file_list
             if os.path.isfile(os.path.join(folder, f))
-            and f.lower().endswith((".png", ".gif"))
+            and f.lower().endswith((".wav", ".mp3", ".m4a"))
         ]
         main_window["-FILE LIST-"].update(fnames)
     elif event == "-FILE LIST-":  # A file was chosen from the listbox

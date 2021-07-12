@@ -37,7 +37,7 @@ def create_file_list_column() -> List[List]:
         [
         sg.Text("Audio File Folder"),
         sg.In(size=(25, 1), enable_events=True, key="-FOLDER-"),
-        sg.FolderBrowse(),
+        sg.FolderBrowse(initial_folder='./'),
         ],
         [
         sg.Listbox(
@@ -57,7 +57,7 @@ def create_file_viewer_column() -> List[List]:
     '''
     # For now, just show the name of the file
     file_viewer_column = [
-        [sg.Text("Choose an audio file from list on left:")],
+        [sg.Text("Choose an audio file from list on left to clone:")],
         [sg.Text(size=(40, 1), key="-TOUT-")],
         [sg.Image(key="-AUDIOFILE-")],
     ]

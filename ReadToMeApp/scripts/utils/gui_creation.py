@@ -3,6 +3,7 @@
 import PySimpleGUI as sg
 import os.path
 from typing import List
+from . import gui_logic
 
 
 def create_main_window_layout() -> List[List]:
@@ -33,16 +34,29 @@ def create_file_list_column() -> List[List]:
 
     TODO: Totally redo this function and add better docs
     '''
+    # file_list_column = [
+    #     [
+    #     sg.Text("Audio File Folder"),
+    #     sg.In(size=(25, 1), enable_events=True, key="-FOLDER-"),
+    #     sg.FolderBrowse(initial_folder='./'),
+    #     ],
+    #     [
+    #     sg.Listbox(
+    #         values=[], enable_events=True, size=(40, 20), key="-FILE LIST-"
+    #     ),
+    #     sg.ReadButton('Create New Voice')
+    #     ],
+    # ]
+
     file_list_column = [
         [
-        sg.Text("Audio File Folder"),
-        sg.In(size=(25, 1), enable_events=True, key="-FOLDER-"),
-        sg.FolderBrowse(initial_folder='./'),
+            sg.Text("Voice Folder", justification='center'),
         ],
         [
-        sg.Listbox(
-            values=[], enable_events=True, size=(40, 20), key="-FILE LIST-"
-        )
+            sg.Listbox(
+                values=gui_logic.filter_voice_sample_file_names('./voice_samples/'), enable_events=True, size=(40, 20), key="-FILE LIST-"
+            ),
+            sg.ReadButton('Create New Voice')
         ],
     ]
 

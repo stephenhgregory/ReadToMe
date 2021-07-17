@@ -1,9 +1,25 @@
 ''' Contains functions for the logic needed to run the GUI of the application '''
 
 import PySimpleGUI as sg
-import os.path
-from typing import List
+import os
+from typing import List, AnyStr
 from playsound import playsound
+
+
+def filter_voice_sample_file_names(voice_sample_dir: AnyStr) -> List:
+    '''
+    Given a directory of voice sample files, returns a list of voice sample names
+    with the file extension stripped.
+
+    Parameters:
+    -----------
+    voice_sample_dir: The directory containing the voice samples
+
+    Returns:
+    --------
+    A list of voice sample names with their file extensions stripped
+    '''
+    return [os.path.splitext(filename)[0] for filename in os.listdir(voice_sample_dir) if filename.endswith('.wav')]
 
 
 def run_main_event_loop(main_window):
@@ -22,22 +38,16 @@ def run_main_event_loop(main_window):
     if event == "Exit" or event == sg.WIN_CLOSED:
         main_window.close()
         exit()
-    # Folder name was filled in, make a list of files in the folder
+    # Folder name was filled in, so make a list of files in the folder
     if event == "-FOLDER-":
         folder = values["-FOLDER-"]
         try:
             # Get list of files in folder
-            file_list = os.listdir(folder)
+            file_list = filter_voice_sample_file_names(folder)
         except:
             file_list = []
+        main_window["-FILE LIST-"].update(file_list)
 
-        fnames = [
-            f
-            for f in file_list
-            if os.path.isfile(os.path.join(folder, f))
-            and f.lower().endswith((".wav", ".mp3", ".m4a"))
-        ]
-        main_window["-FILE LIST-"].update(fnames)
     elif event == "-FILE LIST-":  # A file was chosen from the listbox
         try:
             filename = os.path.join(
@@ -48,3 +58,6 @@ def run_main_event_loop(main_window):
 
         except:
             pass
+
+    elif event == "Create New Voice":
+        print('\'Create new voice\' button clicked!')

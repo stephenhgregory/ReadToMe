@@ -4,6 +4,8 @@ import pyaudio
 import wave
 
 def record_audio(filename: str, chunk_size: int, etc):
+
+    
     pass
 
 # the file name output you want to record into

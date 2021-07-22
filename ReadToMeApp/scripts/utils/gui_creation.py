@@ -71,9 +71,9 @@ def create_file_viewer_column() -> List[List]:
     '''
     # For now, just show the name of the file
     file_viewer_column = [
-        [sg.Text("Choose an audio file from list on left to clone:")],
+        [sg.Text("Choose an speaker from from list to speak with:")],
         [sg.Text(size=(40, 1), key="-TOUT-")],
-        [sg.Image(key="-AUDIOFILE-")],
+        [sg.Image(key="-IMAGE-")],
     ]
 
     return file_viewer_column

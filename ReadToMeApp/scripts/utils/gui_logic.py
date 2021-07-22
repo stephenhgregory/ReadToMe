@@ -22,6 +22,21 @@ def filter_voice_sample_file_names(voice_sample_dir: AnyStr) -> List:
     return [os.path.splitext(filename)[0] for filename in os.listdir(voice_sample_dir) if filename.endswith('.wav')]
 
 
+def get_image_file_name(wav_filename: AnyStr) -> List:
+    '''
+    Given a path to a voice sample file, returns the path to an image of the speaker
+
+    Parameters:
+    -----------
+    wav_filename: The path to the wav file containing a sample voice
+
+    Returns:
+    --------
+    A filepath to the image corresponding to an image of the speaker
+    '''
+    return os.path.splitext(wav_filename)[0] + ".jpeg"
+
+
 def run_main_event_loop(main_window):
     '''
     Runs the main event loop for the application
@@ -50,11 +65,9 @@ def run_main_event_loop(main_window):
 
     elif event == "-FILE LIST-":  # A file was chosen from the listbox
         try:
-            filename = os.path.join(
-                values["-FOLDER-"], values["-FILE LIST-"][0]
-            )
+            filename = get_image_file_name(os.path.join('./voice_samples/', values["-FILE LIST-"][0]))
             main_window["-TOUT-"].update(filename)
-            main_window["-AUDIOFILE-"].update(filename=filename)
+            main_window["-IMAGE-"].update(filename=filename)
 
         except:
             pass

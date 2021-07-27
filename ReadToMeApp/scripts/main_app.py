@@ -2,6 +2,7 @@ import PySimpleGUI as sg
 import os.path
 from typing import List
 from utils import gui_creation, gui_logic
+import asyncio
 
 
 if __name__ == "__main__":

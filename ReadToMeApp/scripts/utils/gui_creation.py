@@ -31,8 +31,6 @@ def create_main_window_layout() -> List[List]:
 def create_file_list_column() -> List[List]:
     '''
     Creates the layout for the file list column
-
-    TODO: Totally redo this function and add better docs
     '''
 
     file_list_column = [
@@ -57,27 +55,6 @@ def create_file_list_column() -> List[List]:
     ]
 
     return file_list_column
-
-# def create_text_file_list_column() -> List[List]:
-#     '''
-#     Creates the layout for the file list column
-
-#     TODO: Totally redo this function and add better docs
-#     '''
-
-#     file_list_column = [
-#         [
-#             sg.Text("Text Folder", justification='center'),
-#         ],
-#         [
-#             sg.Listbox(
-#                 values=gui_logic.filter_text_sample_file_names('./text_samples/'), enable_events=True, size=(40, 20), key="-TEXT FILE LIST-"
-#             ),
-#             sg.ReadButton('Create New Text')
-#         ],
-#     ]
-
-#     return file_list_column
 
 
 def create_file_viewer_column() -> List[List]:

@@ -4,7 +4,7 @@ import PySimpleGUI as sg
 import os
 from typing import List, AnyStr
 from playsound import playsound
-from utils.real_time_voice_cloning import test_module
+from utils.real_time_voice_cloning import main_tts
 
 
 def filter_voice_sample_file_names(voice_sample_dir: AnyStr) -> List:
@@ -183,8 +183,7 @@ def run_main_event_loop(main_window):
     elif event == "-TTS-":
         try:
             # Perform TTS
-
-            test_module.hello_world()
+            main_tts.tts()
 
             print("Pressed the Button for TTS!")
         except:

@@ -32,8 +32,7 @@ def record_audio(filename: str, chunk_size: int = 1024, format: int = pyaudio.pa
     # Terminate pyaudio object
     p.terminate()
     # Return the frames
-    
-    pass
+    return frames
 
 
 def save_audio_file(py_audio, frames, filename: str, sample_rate: int = 44100, format: int = pyaudio.paInt16, num_channels: int = 1):
@@ -60,6 +59,6 @@ def record_and_save_audio(filename: str, chunk_size: int = 1024, format: int = p
     TODO: Create docs for this function
     '''
     # Record the audio file
-    record_audio(filename=filename, chunk_size=chunk_size, format=format, num_channels=num_channels, sample_rate=sample_rate, num_seconds=num_seconds, hear_voice_playback=hear_voice_playback)
+    frames = record_audio(filename=filename, chunk_size=chunk_size, format=format, num_channels=num_channels, sample_rate=sample_rate, num_seconds=num_seconds, hear_voice_playback=hear_voice_playback)
     # Save the audio file
     save_audio_file(frames=frames, filename=filename, format=format, num_channels=num_channels)

@@ -1,9 +1,9 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from vocoder.distribution import sample_from_discretized_mix_logistic
-from vocoder.display import *
-from vocoder.audio import *
+from utils.real_time_voice_cloning.vocoder.distribution import sample_from_discretized_mix_logistic
+from utils.real_time_voice_cloning.vocoder.display import *
+from utils.real_time_voice_cloning.vocoder.audio import *
 
 
 class ResBlock(nn.Module):

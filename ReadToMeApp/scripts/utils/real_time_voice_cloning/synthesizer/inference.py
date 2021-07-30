@@ -1,10 +1,10 @@
 import torch
-from synthesizer import audio
-from synthesizer.hparams import hparams
-from synthesizer.models.tacotron import Tacotron
-from synthesizer.utils.symbols import symbols
-from synthesizer.utils.text import text_to_sequence
-from vocoder.display import simple_table
+from utils.real_time_voice_cloning.synthesizer import audio
+from utils.real_time_voice_cloning.synthesizer.hparams import hparams
+from utils.real_time_voice_cloning.synthesizer.models.tacotron import Tacotron
+from utils.real_time_voice_cloning.synthesizer.utils.symbols import symbols
+from utils.real_time_voice_cloning.synthesizer.utils.text import text_to_sequence
+from utils.real_time_voice_cloning.vocoder.display import simple_table
 from pathlib import Path
 from typing import Union, List
 import numpy as np
@@ -65,7 +65,8 @@ class Synthesizer:
         self._model.eval()
 
         if self.verbose:
-            print("Loaded synthesizer \"%s\" trained to step %d" % (self.model_fpath.name, self._model.state_dict()["step"]))
+            pass
+            # print("Loaded synthesizer \"%s\" trained to step %d" % (self.model_fpath.name, self._model.state_dict()["step"]))
 
     def synthesize_spectrograms(self, texts: List[str],
                                 embeddings: Union[np.ndarray, List[np.ndarray]],
@@ -103,6 +104,7 @@ class Synthesizer:
                              for i in range(0, len(embeddings), hparams.synthesis_batch_size)]
 
         specs = []
+        print(batched_inputs)
         for i, batch in enumerate(batched_inputs, 1):
             if self.verbose:
                 print(f"\n| Generating {i}/{len(batched_inputs)}")

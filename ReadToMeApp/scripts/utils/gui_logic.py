@@ -180,12 +180,24 @@ def run_main_event_loop(main_window):
     elif event == "Create New Text":
         print('\'Create New Text\' button clicked!')
     
+
     elif event == "-TTS-":
+        # Perform TTS
         try:
+            # Get path to speaker file
+            speaker_path = "./voice_samples/" + values["-VOICE FILE LIST-"][0] + ".wav"
+            
+            # Get text content for speaker to vocalize
+            text_content = read_text_file(get_text_file_name(os.path.join('./text_samples/', values["-TEXT FILE LIST-"][0])))
+
+            # Get content name (for saving the spoken file)
+            content_name = values["-TEXT FILE LIST-"][0]
+
             # Perform TTS
-            main_tts.tts()
+            main_tts.tts(text_content, speaker_path, content_name)
 
             print("Pressed the Button for TTS!")
+            print(main_window["-TEXT SCRIPT-"])
         except:
             pass
 

@@ -1,9 +1,10 @@
-from vocoder.models.fatchord_version import WaveRNN
-from vocoder import hparams as hp
+from utils.real_time_voice_cloning.vocoder.models.fatchord_version import WaveRNN
+from utils.real_time_voice_cloning.vocoder import hparams as hp
 import torch
 
 
 _model = None   # type: WaveRNN
+_device = None  # type: torch.device
 
 def load_model(weights_fpath, verbose=True):
     global _model, _device
@@ -25,6 +26,7 @@ def load_model(weights_fpath, verbose=True):
         mode=hp.voc_mode
     )
 
+
     if torch.cuda.is_available():
         _model = _model.cuda()
         _device = torch.device('cuda')
@@ -32,9 +34,13 @@ def load_model(weights_fpath, verbose=True):
         _device = torch.device('cpu')
     
     if verbose:
-        print("Loading model weights at %s" % weights_fpath)
+        # print("Loading model weights at %s" % weights_fpath)
+        pass
     checkpoint = torch.load(weights_fpath, _device)
+    print(weights_fpath)
     _model.load_state_dict(checkpoint['model_state'])
+    print('here')
+
     _model.eval()
 
 

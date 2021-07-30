@@ -1,8 +1,8 @@
-from encoder.params_data import *
-from encoder.model import SpeakerEncoder
-from encoder.audio import preprocess_wav   # We want to expose this function from here
+from utils.real_time_voice_cloning.encoder.params_data import *
+from utils.real_time_voice_cloning.encoder.model import SpeakerEncoder
+from utils.real_time_voice_cloning.encoder.audio import preprocess_wav   # We want to expose this function from here
 from matplotlib import cm
-from encoder import audio
+from utils.real_time_voice_cloning.encoder import audio
 from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
@@ -22,6 +22,7 @@ def load_model(weights_fpath: Path, device=None):
     model will be loaded and will run on this device. Outputs will however always be on the cpu. 
     If None, will default to your GPU if it"s available, otherwise your CPU.
     """
+    print('Loading the encoder...')
     # TODO: I think the slow loading of the encoder might have something to do with the device it
     #   was saved on. Worth investigating.
     global _model, _device
@@ -33,7 +34,6 @@ def load_model(weights_fpath: Path, device=None):
     checkpoint = torch.load(weights_fpath, _device)
     _model.load_state_dict(checkpoint["model_state"])
     _model.eval()
-    print("Loaded encoder \"%s\" trained to step %d" % (weights_fpath.name, checkpoint["step"]))
     
     
 def is_loaded():

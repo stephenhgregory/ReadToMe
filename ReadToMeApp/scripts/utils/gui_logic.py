@@ -4,6 +4,7 @@ import PySimpleGUI as sg
 import os
 from typing import List, AnyStr
 from playsound import playsound
+from utils.real_time_voice_cloning import test_module
 
 
 def filter_voice_sample_file_names(voice_sample_dir: AnyStr) -> List:
@@ -85,6 +86,37 @@ def get_image_file_name(wav_filename: AnyStr) -> List:
     return os.path.splitext(wav_filename)[0] + ".png"
 
 
+def get_text_file_name(text_filename: AnyStr) -> List:
+    '''
+    Given a path to a text file, returns the true path to the file (with extension)
+
+    Parameters:
+    -----------
+    text_filename: The path to the text file
+
+    Returns:
+    --------
+    A filepath to the text (including file extension)
+    '''
+    return os.path.splitext(text_filename)[0] + ".txt"
+
+
+def read_text_file(filepath: AnyStr):
+    '''
+    Given a text file, reads the entire content of the file and returns that
+    content as a single string.
+    ''' 
+    # Open the text file
+    text_file = open(filepath, mode='r')
+    # read all lines of the text file
+    content = text_file.read()
+    # close the file
+    text_file.close()
+
+    return content
+
+
+
 def run_main_event_loop(main_window):
     '''
     Runs the main event loop for the application
@@ -116,12 +148,46 @@ def run_main_event_loop(main_window):
     elif event == "-VOICE FILE LIST-":  # A voice file was chosen from the listbox
         try:
             filename = get_image_file_name(os.path.join('./voice_samples/', values["-VOICE FILE LIST-"][0]))
-            print(filter_voice_sample_file_name(filename))
-            main_window["-TOUT-"].update(filter_voice_sample_file_name(filename))
+            main_window["-VOICE NAME-"].update(filter_voice_sample_file_name(filename))
             main_window["-IMAGE-"].update(filename=filename, size=(200, 200))
+
+            # Update the TTS button
+            if values["-VOICE FILE LIST-"][0] and values["-TEXT FILE LIST-"][0]:
+                main_window["-TTS-"].update(disabled=False)
+                print('TTS Button enabled!')
 
         except:
             pass
 
+    elif event == "-TEXT FILE LIST-":  # A text file was chosen from the listbox
+        try:
+            filename = get_text_file_name(os.path.join('./text_samples/', values["-TEXT FILE LIST-"][0]))
+            print(f'Text File: {filename}')
+            print(f'Voice File: {values["-VOICE FILE LIST-"][0]}')
+            main_window["-TEXT SCRIPT-"].update(read_text_file(filename))
+
+            # Update the TTS button
+            if values["-VOICE FILE LIST-"][0] and values["-TEXT FILE LIST-"][0]:
+                main_window["-TTS-"].update(disabled=False)
+                print('TTS Button enabled!')
+
+        except: 
+            pass
+
     elif event == "Create New Voice":
-        print('\'Create new voice\' button clicked!')
+        print('\'Create New Voice\' button clicked!')
+
+    elif event == "Create New Text":
+        print('\'Create New Text\' button clicked!')
+    
+    elif event == "-TTS-":
+        try:
+            # Perform TTS
+
+            test_module.hello_world()
+
+            print("Pressed the Button for TTS!")
+        except:
+            pass
+
+    
